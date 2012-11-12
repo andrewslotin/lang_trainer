@@ -1,0 +1,7 @@
+%ul
+- collection.each do |dict|
+  %li
+    = link_to dict.lang, dict
+    = "(#{dict.entries.size})"
+
+= link_to "Create new dictionary", new_dictionary_path

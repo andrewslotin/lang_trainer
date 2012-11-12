@@ -6,5 +6,7 @@ LangTrainer::Application.routes.draw do
   match '/signout'                 => 'sessions#destroy', as: :signout
   match '/auth/failure'            => 'sessions#failure'
 
-  resources :dictionaries
+  resources :dictionaries do
+    resources :entries, only: [:new, :create, :destroy]
+  end
 end
