@@ -7,6 +7,8 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'haml'
 gem 'haml-rails'
+gem 'inherited_resources'
+gem 'cancan'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
