@@ -1,10 +1,19 @@
-%h1 Books
+.page-header
+  %h1= resource_class.name.humanize.pluralize
 
-%ul
-  - collection.each do |book|
-    %li
-      = link_to book.title, book
-      %em= "by #{book.author}"
-      = "(#{book.lang})"
+%table.table.table-striped
+  %thead
+    %tr
+      %th= resource_class.human_attribute_name :author
+      %th= resource_class.human_attribute_name :title
+      %th= Entry.name.humanize.pluralize
+  %tbody
+    - collection.each do |book|
+      %tr
+        %td= book.author
+        %td= link_to book.title, book
+        %td
+          = book.chapters.sum do |ch|
+            - ch.entries.size
 
 = link_to "Create new book", new_book_path

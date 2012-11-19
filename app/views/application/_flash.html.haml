@@ -1,0 +1,9 @@
+- if flash
+  - if flash[:error]
+    .alert.alert-error
+      %button.close(type="button" data-dismiss="alert") x
+      = flash[:error]
+  - if flash[:notice]
+    .alert.alert-success
+      %button.close(type="button" data-dismiss="alert") x
+      = flash[:notice]

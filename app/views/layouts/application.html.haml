@@ -1,9 +1,24 @@
 !!! 5
-%head
-  %title LangTrainer</title>
-  = stylesheet_link_tag    "application", :media => "all"
-  = javascript_include_tag "application"
-  = csrf_meta_tags
-
-%body
-  = yield
+%html
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %title LangTrainer
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    = csrf_meta_tags
+  %body
+    #header.navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          = link_to "LangTrainer", root_url, :class => "brand"
+          = render "application/header"
+    .container
+      .content
+        .row
+          .span12
+            = render "application/flash"
+            = yield
+      %footer
+    = javascript_include_tag "application"

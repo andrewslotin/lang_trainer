@@ -1,4 +1,6 @@
 class BooksController < InheritedResources::Base
+  belongs_to :dictionary, optional: true
+
   def create
     build_resource
 

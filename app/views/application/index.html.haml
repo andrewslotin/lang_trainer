@@ -1,8 +1,2 @@
-%ul
-  - if user_signed_in?
-    %li= "Logged in as #{current_user.name}"
-    %li= link_to "Dictionaries", dictionaries_path
-    %li= link_to "Books", books_path
-    %li= link_to "Logout", signout_path
-  - else
-    %li= link_to "Login", signin_path
+.page-header
+  %h1 Welcome to Lang Trainer

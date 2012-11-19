@@ -7,6 +7,7 @@ LangTrainer::Application.routes.draw do
   match '/auth/failure'            => 'sessions#failure'
 
   resources :dictionaries do
+    resources :books
     resources :entries
   end
 
