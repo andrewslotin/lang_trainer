@@ -1,11 +1,25 @@
+require 'open-uri'
+
 class Entry
   include Mongoid::Document
 
   field :word, type: String
-  field :meaning, type: String
+  field :frequency, type: Integer
 
-  embedded_in :dictionary
+  embedded_in :source, polymorphic: true, inverse_of: :entries
 
   validates :word, presence: true, uniqueness: true
-  validates :meaning, presence: true
+
+  delegate :dictionary, to: :source
+
+  def ignore!
+    dictionary.ignored_words << word
+    dictionary.save && self.destroy
+  end
+
+  def translations
+    url = "http://m.slovari.yandex.ru/search.xml?text=#{CGI::escape(word)}&lang=#{dictionary.lang}"
+
+    Nokogiri::HTML(open(url).read).css('.b-translate .l1 a').map { |v| v.inner_text }
+  end
 end

@@ -1,0 +1,10 @@
+%h1 Books
+
+%ul
+  - collection.each do |book|
+    %li
+      = link_to book.title, book
+      %em= "by #{book.author}"
+      = "(#{book.lang})"
+
+= link_to "Create new book", new_book_path

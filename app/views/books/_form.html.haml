@@ -1,0 +1,13 @@
+= form_for resource do |f|
+  %div
+    = f.label :author
+    = f.text_field :author
+  %div
+    = f.label :title
+    = f.text_field :title
+  %div
+    = f.label :dictionary
+    = f.select :dictionary, options_from_collection_for_select(current_user.dictionaries, :lang, :lang)
+
+  %div
+    = f.submit

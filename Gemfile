@@ -9,6 +9,8 @@ gem 'haml'
 gem 'haml-rails'
 gem 'inherited_resources'
 gem 'cancan'
+gem 'unicode'
+gem 'nokogiri'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

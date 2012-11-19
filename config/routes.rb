@@ -7,6 +7,14 @@ LangTrainer::Application.routes.draw do
   match '/auth/failure'            => 'sessions#failure'
 
   resources :dictionaries do
-    resources :entries, only: [:new, :create, :destroy]
+    resources :entries
+  end
+
+  resources :books do
+    resources :chapters do
+      resources :entries do
+        put :ignore, on: :member
+      end
+    end
   end
 end

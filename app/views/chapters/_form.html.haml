@@ -1,0 +1,9 @@
+= form_for [parent, resource], html: { multipart: true } do |f|
+  %div
+    = f.label :title
+    = f.text_field :title
+  %div
+    = f.label :content
+    = f.file_field :content
+  %div
+    = f.submit

@@ -1,7 +1,5 @@
 %h1= resource.lang
 
-= render "form"
-
 %table
   %thead
     %tr
@@ -12,5 +10,6 @@
     - resource.entries.each do |entry|
       %tr
         %td= entry.word
-        %td= entry.meaning
+        %td= entry.meanings.join(", ")
         %td= link_to "x", dictionary_entry_path(resource, entry), method: :delete
+

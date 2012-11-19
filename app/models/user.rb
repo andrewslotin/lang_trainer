@@ -6,6 +6,8 @@ class User
   field :name,     type: String
   attr_accessible :provider, :uid, :name
 
+  has_many :dictionaries
+
   def self.create_with_omniauth(auth)
     auth['info'] ||= {}
 

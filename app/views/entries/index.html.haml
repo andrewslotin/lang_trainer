@@ -1,0 +1,7 @@
+%h1= parent.title
+
+%ul
+  - collection.each do |entry|
+    %li= entry.word
+
+= link_to "Add an entry", new_dictionary_entry_path(parent)

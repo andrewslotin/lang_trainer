@@ -1,5 +1,9 @@
 = form_for resource do |f|
-  = f.label :lang
-  = f.text_field :lang
-
-  = f.submit
+  %div
+    = f.label :title
+    = f.text_field :title
+  %div
+    = f.label :lang
+    = f.select :lang, options_for_select([["English", :en], ["Deutsch", :de]])
+  %div
+    = f.submit

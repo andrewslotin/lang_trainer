@@ -1,0 +1,6 @@
+%table
+  - resource.entries.each do |entry|
+    %tr
+      %td= "#{entry.word} #{entry.frequency}"
+      %td= link_to "Add to dictionary", dictionary_entries_path(resource.dictionary.id, entry: {word: entry.word}), method: :post
+      %td= link_to "Ignore", ignore_book_chapter_entry_path(parent, resource, entry), method: :put

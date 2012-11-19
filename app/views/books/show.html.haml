@@ -1,0 +1,7 @@
+%h1= resource.title 
+%em= "by #{resource.author}"
+%ol
+  - resource.chapters.each do |chapter|
+    %li= link_to chapter.title, book_chapter_path(resource, chapter)
+
+= link_to "Add a chapter", new_book_chapter_path(resource)
