@@ -1,9 +1,20 @@
 = form_for [parent, resource], html: { multipart: true } do |f|
-  %div
-    = f.label :title
-    = f.text_field :title
-  %div
-    = f.label :content
-    = f.file_field :content
-  %div
-    = f.submit
+  .accordion#chapterContent
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle(data-toggle="collapse" data-parent="#chapterContent" href="#collapseFile")
+          From file
+      #collapseFile.accordion-body.collapse.in
+        .accordion-inner
+          = f.file_field :content
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle(data-toggle="collapse" data-parent="#chapterContent" href="#collapseText")
+          Paste text
+      #collapseText.accordion-body.collapse
+        .accordion-inner
+          = f.text_area :text, value: "", style: "width: 99%"
+  .control-group
+    .controls
+      = f.submit class: "btn btn-primary"
+      = link_to "Back", :back, class: "btn"

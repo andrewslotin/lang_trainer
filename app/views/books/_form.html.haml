@@ -1,13 +1,18 @@
-= form_for resource do |f|
-  %div
-    = f.label :author
-    = f.text_field :author
-  %div
-    = f.label :title
-    = f.text_field :title
-  %div
-    = f.label :dictionary
-    = f.select :dictionary, options_from_collection_for_select(current_user.dictionaries, :lang, :lang)
+= form_for resource, html: { class: "form-horizontal" } do |f|
+  .control-group
+    = f.label :author, class: "control-label"
+    .controls
+      = f.text_field :author
+  .control-group
+    = f.label :title, class: "control-label"
+    .controls
+      = f.text_field :title
+  .control-group
+    = f.label :dictionary, class: "control-label"
+    .controls
+      = f.select :dictionary, options_from_collection_for_select(current_user.dictionaries, :lang, :lang)
 
-  %div
-    = f.submit
+  .control-group
+    .controls
+      = f.submit class: "btn btn-primary"
+      = link_to "Back", :back, class: "btn"

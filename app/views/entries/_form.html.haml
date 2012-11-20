@@ -1,6 +1,9 @@
-= form_for [parent, resource] do |f|
-  %div
-    = f.label :word
-    = f.text_field :word
-  %div
-    = f.submit
+= form_for [parent, resource], html: { class: "form-horizontal" } do |f|
+  .control-group
+    = f.label :word, class: "control-label"
+    .controls
+      = f.text_field :word
+  .control-group
+    .controls
+      = f.submit class: "btn btn-primary"
+      = link_to "Back", :back, class: "btn"
