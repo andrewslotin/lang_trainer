@@ -9,8 +9,12 @@ class Chapter
   delegate :dictionary, to: :book
 
   def entries=(value)
+    known_entries = value.to_a.select do |w|
+      dictionary << w if dictionary.entries.where(word: w.word).exists?
+    end
+
     self[:entries] = value.to_a.reject do |w| 
-      dictionary.entries.where(word: w.word).exists? ||
+      known_entries.include?(w) ||
       dictionary.ignored_words.include?(w.word)
     end.sort_by { |entry| -entry.frequency.to_i }
   end

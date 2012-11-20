@@ -4,7 +4,7 @@ class Entry
   include Mongoid::Document
 
   field :word, type: String
-  field :frequency, type: Integer
+  field :frequency, type: Integer, default: 0
 
   embedded_in :source, polymorphic: true, inverse_of: :entries
 

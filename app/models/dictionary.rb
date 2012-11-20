@@ -11,4 +11,13 @@ class Dictionary
 
   validates :lang, presence: true
   validates :title, presence: true, uniqueness: { scope: :lang }
+
+  def <<(value)
+    existing_entry = entries.where(word: value.word).first
+    if existing_entry
+      existing_entry.update_attribute(:frequency, existing_entry.frequency.to_i + value.frequency.to_i)
+    else
+      entries << value unless ignored_words.include? value.word
+    end
+  end
 end
