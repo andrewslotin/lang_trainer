@@ -25,3 +25,10 @@ group :development do
   gem 'puma'
   gem 'awesome_print'
 end
+
+group :test do
+  gem 'faker'
+  gem 'steak'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+end
