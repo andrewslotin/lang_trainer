@@ -29,8 +29,7 @@ class Chapter
   end
 
   def ignore_word(word)
-    entry = entries.find { |e| e.word == "word" }
-    self.inc(:words_number, entry.frequency).pull(:entries, word: word)
+    entries.find_by(word: word).destroy
   end
 
   def self.build_entries(text)
