@@ -1,3 +1,11 @@
+development:
+  sessions:
+    default:
+      database: lang_trainer_development
+      hosts:
+        - localhost:27017
+      options:
+
 test:
   sessions:
     default:
@@ -8,5 +16,3 @@ test:
         consistency: :strong
         max_retries: 1
         retry_interval: 0
-
-<%= File.read("mongoid.yml.local").join("\n") rescue nil %>
