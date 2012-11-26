@@ -13,6 +13,8 @@ FactoryGirl.define do
     trait :twitter do
       provider :twitter
     end
+
+    factory :twitter_user, traits: [:twitter]
   end
 
   factory :dictionary do
