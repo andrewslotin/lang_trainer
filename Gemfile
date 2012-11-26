@@ -33,9 +33,7 @@ group :development do
 end
 
 group :test do
-  if RUBY_PLATFORM[/darwin/i]
-    gem 'rb-fsevent', require: false
-  end
+  gem 'rb-fsevent', require: false
   gem 'capybara', '~> 1.0'
   gem 'spork-rails'
   gem 'faker'
