@@ -23,6 +23,8 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
     config.order = "random"
   end
+
+  OmniAuth.config.test_mode = true
 end
 
 Spork.each_run do
