@@ -29,7 +29,7 @@ class Chapter
   end
 
   def ignore_word(word)
-    entry = entries.find_by(word: word)
+    entry = entries.where(word: word).first
 
     if entry
       self.inc(:words_number, -entry.frequency)
