@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
+  before_filter :authenticate_user!, except: :index
   helper_method :current_user, :user_signed_in?, :correct_user?
 
   def index
@@ -8,8 +10,8 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    begin
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||=begin
+      User.find(session[:user_id]) if session[:user_id]
     rescue Mongoid::Errors::DocumentNotFound
       nil
     end

@@ -10,12 +10,6 @@ class EntriesController < InheritedResources::Base
     end
   end
 
-  def ignore
-    resource.ignore!
-
-    redirect_to :back
-  end
-
   def destroy
     super do |format|
       format.html { redirect_to parent }
