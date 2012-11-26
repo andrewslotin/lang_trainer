@@ -1,0 +1,12 @@
+test:
+  sessions:
+    default:
+      database: lang_trainer_test
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+        max_retries: 1
+        retry_interval: 0
+
+<%= File.read("mongoid.yml.local").join("\n") rescue nil %>
