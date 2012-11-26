@@ -7,6 +7,9 @@ describe Dictionary do
   describe "ignore_word" do
     let(:word) { "the" }
     let(:entry) { FactoryGirl.build :entry, word: word }
+    let(:books) do
+      (0...3).map { |i| FactoryGirl.create :book, dictionary: subject }
+    end
 
     context "when the given word is not included in ignored_words list" do
       it "adds the word to ignored_words" do
@@ -16,10 +19,6 @@ describe Dictionary do
       end
 
       context "for each book" do
-        let(:books) do
-          (0...3).map { |i| FactoryGirl.create :book, dictionary: subject }
-        end
-
         it "calls Book#ignore_word with given word" do
           books.each do |book|
             book.should_receive :ignore_word, with: word
@@ -55,7 +54,13 @@ describe Dictionary do
       end
 
       context "for each book" do
-        it "does not call Book#ignore_word"
+        it "does not call Book#ignore_word" do
+          books.each do |book|
+            book.should_not_receive :ignore_word
+          end
+
+          subject.ignore_word word
+        end
       end
     end
   end

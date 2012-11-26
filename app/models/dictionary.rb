@@ -22,11 +22,13 @@ class Dictionary
   end
 
   def ignore_word(word)
-    self.class.collection.where(_id: self._id, ignored_words: { '$ne' => word }).update(
-        "$push" => { ignored_words: word },
-        "$pull" => { entries: { word: word }}
-    )
-    #self.books.where("chapters.$.entries.$.word" => word).each { |book| book.ignore_word word }
-    self.books.each { |book| book.ignore_word word }
+    unless ignored_words.include? word
+      self.class.collection.where(_id: self._id).update(
+          "$push" => { ignored_words: word },
+          "$pull" => { entries: { word: word }}
+      )
+
+      self.books.each { |book| book.ignore_word word }
+    end
   end
 end
