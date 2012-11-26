@@ -43,7 +43,16 @@ describe Dictionary do
     end
 
     context "when the given word is already in ignored_words list" do
-      it "does not add the word to ignored_words"
+      before do
+        subject.ignored_words = [word]
+        subject.save
+      end
+
+      it "does not add the word to ignored_words" do
+        subject.ignore_word word
+
+        expect(subject.reload.ignored_words).to eq [word]
+      end
 
       context "for each book" do
         it "does not call Book#ignore_word"

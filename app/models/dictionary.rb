@@ -22,7 +22,7 @@ class Dictionary
   end
 
   def ignore_word(word)
-    self.class.collection.find(_id: self._id).update(
+    self.class.collection.where(_id: self._id, ignored_words: { '$ne' => word }).update(
         "$push" => { ignored_words: word },
         "$pull" => { entries: { word: word }}
     )
