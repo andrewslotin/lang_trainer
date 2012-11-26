@@ -55,7 +55,7 @@ FactoryGirl.define do
       end
 
       after(:build) do |chapter, evaluator|
-        chapter.entries { (0...evaluator.entries_count).map { FactoryGirl.build(:entry) } }
+        chapter[:entries] = (0...evaluator.entries_count).map { FactoryGirl.build(:entry) }
         chapter.words_number = chapter.entries.sum { |entry| entry.frequency }
       end
     end
