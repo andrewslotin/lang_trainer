@@ -1,4 +1,6 @@
-%table
+.page-header
+  %h1= resource.title
+%table.table.table-striped
   - resource.entries.each do |entry|
     %tr
       %td= "#{entry.word} #{entry.frequency}"

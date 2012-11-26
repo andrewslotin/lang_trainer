@@ -1,19 +1,21 @@
-.page-header
-  %h1= resource_class.name.humanize.pluralize
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th= resource_class.human_attribute_name :title
-      %th= resource_class.human_attribute_name :lang
-      %th= resource_class.human_attribute_name :books
-      %th= Entry.name.humanize.pluralize
-  %tbody
-    - collection.each do |dict|
+- if collection.empty?
+  = render "empty_collection"
+- else
+  .page-header
+    %h1= resource_class.name.humanize.pluralize
+  %table.table.table-striped
+    %thead
       %tr
-        %td= link_to dict.title, dictionary_entries_path(dict)
-        %td= dict.lang
-        %td= link_to dict.books.length, dictionary_books_path(dict)
-        %td= dict.entries.length
+        %th= resource_class.human_attribute_name :title
+        %th= resource_class.human_attribute_name :lang
+        %th= resource_class.human_attribute_name :books
+        %th= Entry.name.humanize.pluralize
+    %tbody
+      - collection.each do |dict|
+        %tr
+          %td= link_to dict.title, dictionary_entries_path(dict)
+          %td= dict.lang
+          %td= link_to dict.books.length, dictionary_books_path(dict)
+          %td= dict.entries.length
 
-= link_to "Create new dictionary", new_dictionary_path
+  = link_to "Add another dictionary", new_dictionary_path

@@ -1,0 +1,6 @@
+.hero-unit
+  %h1 No books :(
+  %p
+    Now you have created a dictionary. Let start by adding a new book!
+  %p
+    = link_to "Create one", parent ? new_dictionary_book_path(parent) : new_book_path, class: "btn btn-primary"

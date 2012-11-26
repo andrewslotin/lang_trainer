@@ -27,6 +27,7 @@ FactoryGirl.define do
         books_count 3
       end
 
+      #books { (0...3).map { |i| FactoryGirl.build(:book) } }
       after(:create) do |dict, evaluator|
         FactoryGirl.create_list(:book, evaluator.books_count, dictionary: dict)
       end
@@ -34,43 +35,35 @@ FactoryGirl.define do
   end
 
   factory :book do
-    title { generate(:book_title) }
     dictionary
 
-    factory :book_with_chapters do
-      ignore do
-        chapters_count 5
-      end
+    title { generate(:book_title) }
 
-      after(:create) do |book, evaluator|
-        FactoryGirl.create_list(:chapter, evaluator.chapters_count, book: book)
-      end
-    end
+    #factory :book_with_chapters do
+    #  ignore do
+    #    chapters_count 5
+    #  end
+    #
+    #  chapters { (0...3).map { |i| FactoryGirl.build(:chapter) } }
+    #end
   end
 
-  factory :chapter do
-    book
-
-    factory :chapter_with_entries do |chapter, evaluator|
-      ignore do
-        entries_count 10
-      end
-
-      FactoryGirl.create_list(:chapter_entry, evaluator.entries_count, source: chapter)
-      chapter.update_attribute :words_number, chapter.entries.sum { |entry| entry.frequency }
-    end
-  end
+  #factory :chapter do
+  #  factory :chapter_with_entries do |chapter, evaluator|
+  #    ignore do
+  #      entries_count 10
+  #    end
+  #
+  #    entries (0...entries_count).map { FactoryGirl.build(:entry) }
+  #
+  #    after(:build) do
+  #      chapter.words_number = chapter.entries.sum { |entry| entry.frequency }
+  #    end
+  #  end
+  #end
 
   factory :entry do
     word { generate(:word_seq) }
-    frequency rand(1000)
-
-    trait :chapter do
-      association :source, factory: :chapter
-    end
-
-    trait :dictionary do
-      association :source, factory: :dictionary
-    end
+    frequency { rand(1000) }
   end
 end

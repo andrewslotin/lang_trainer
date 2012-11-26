@@ -20,4 +20,13 @@ class Dictionary
       entries << value unless ignored_words.include? value.word
     end
   end
+
+  def ignore_word(word)
+    self.class.collection.find(_id: self._id).update(
+        "$push" => { ignored_words: word },
+        "$pull" => { entries: { word: word }}
+    )
+    #self.books.where("chapters.$.entries.$.word" => word).each { |book| book.ignore_word word }
+    self.books.each { |book| book.ignore_word word }
+  end
 end

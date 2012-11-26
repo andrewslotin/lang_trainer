@@ -10,7 +10,7 @@
   .control-group
     = f.label :dictionary, class: "control-label"
     .controls
-      = f.select :dictionary, options_from_collection_for_select(current_user.dictionaries, :lang, :lang)
+      = f.select :dictionary, options_from_collection_for_select(current_user.dictionaries, :lang, :title, selected: parent.try(:lang)), include_blank: true
 
   .control-group
     .controls

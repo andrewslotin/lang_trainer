@@ -4,7 +4,12 @@ class ChaptersController < InheritedResources::Base
   belongs_to :book
 
   def create
-    text = params[:chapter].delete(:content).tempfile.read.force_encoding("UTF-8")
+    text = if params[:chapter][:content].is_a? String
+             params[:chapter].delete(:content)
+           else
+             params[:chapter].delete(:content).tempfile.read.force_encoding("UTF-8")
+           end
+
     params[:chapter][:title] = params[:chapter][:title].presence || text[/.+?$/].strip
 
     build_resource

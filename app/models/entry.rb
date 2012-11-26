@@ -13,8 +13,11 @@ class Entry
   delegate :dictionary, to: :source
 
   def ignore!
-    dictionary.ignored_words << word
-    dictionary.save && self.destroy
+    dictionary.ignore word
+
+    dictionary.save &&
+    (!source.is_a?(Chapter) || source.update_attribute(:words_count, source.words_count - frequency)) &&
+    self.destroy
   end
 
   def translations

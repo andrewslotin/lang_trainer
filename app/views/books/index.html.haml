@@ -1,19 +1,29 @@
-.page-header
-  %h1= resource_class.name.humanize.pluralize
+- if collection.empty?
+  - if current_user.dictionaries.exists?
+    = render "empty_collection"
+  - else
+    = render "dictionaries/empty_collection"
+- else
+  .page-header
+    %h1= resource_class.name.humanize.pluralize
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th= resource_class.human_attribute_name :author
-      %th= resource_class.human_attribute_name :title
-      %th= Entry.name.humanize.pluralize
-  %tbody
-    - collection.each do |book|
+  %table.table
+    %thead
       %tr
-        %td= book.author
-        %td= link_to book.title, book
-        %td
-          = book.chapters.sum do |ch|
-            - ch.entries.size
+        %th= resource_class.human_attribute_name :author
+        %th= resource_class.human_attribute_name :title
+        %th= resource_class.human_attribute_name :entries
+        %th= resource_class.human_attribute_name :progress
+    %tbody
+      - collection.each do |book|
+        %tr
+          %td= book.author
+          %td= link_to book.title, book
+          %td
+            = book.chapters.sum do |ch|
+              - ch.entries.size
+          %td
+            .progress.bar-success{ style: "margin-bottom: 0" }
+              .bar{ style: "width: #{ book.progress * 100}%" }
 
-= link_to "Create new book", new_book_path
+  = link_to "Create new book", parent ? new_dictionary_book_path(parent) : new_book_path
