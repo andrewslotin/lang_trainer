@@ -29,7 +29,12 @@ class Chapter
   end
 
   def ignore_word(word)
-    entries.find_by(word: word).destroy
+    entry = entries.find_by(word: word)
+
+    if entry
+      self.inc(:words_number, -entry.frequency)
+      entry.destroy
+    end
   end
 
   def self.build_entries(text)

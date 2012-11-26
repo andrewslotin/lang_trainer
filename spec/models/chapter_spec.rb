@@ -28,7 +28,13 @@ describe Chapter do
 
         expect(subject.entries).not_to include entry
       end
-      it "decrements the number of words in chapter by the entry frequency"
+
+      it "decrements the number of words in chapter by the entry frequency" do
+        words_number = subject.words_number
+        subject.ignore_word word
+
+        expect(subject.words_number).to eq words_number - entry.frequency
+      end
     end
   end
 end
