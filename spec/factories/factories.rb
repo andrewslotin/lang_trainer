@@ -48,19 +48,18 @@ FactoryGirl.define do
     #end
   end
 
-  #factory :chapter do
-  #  factory :chapter_with_entries do |chapter, evaluator|
-  #    ignore do
-  #      entries_count 10
-  #    end
-  #
-  #    entries (0...entries_count).map { FactoryGirl.build(:entry) }
-  #
-  #    after(:build) do
-  #      chapter.words_number = chapter.entries.sum { |entry| entry.frequency }
-  #    end
-  #  end
-  #end
+  factory :chapter do
+    factory :chapter_with_entries do
+      ignore do
+        entries_count 10
+      end
+
+      after(:build) do |chapter, evaluator|
+        chapter.entries { (0...evaluator.entries_count).map { FactoryGirl.build(:entry) } }
+        chapter.words_number = chapter.entries.sum { |entry| entry.frequency }
+      end
+    end
+  end
 
   factory :entry do
     word { generate(:word_seq) }

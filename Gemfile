@@ -28,6 +28,8 @@ group :development do
   gem 'awesome_print'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'growl'
+  gem 'growl-rspec'
 end
 
 group :test do
