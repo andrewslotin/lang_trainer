@@ -32,9 +32,7 @@ end
 
 group :test do
   if RUBY_PLATFORM[/darwin/i]
-    gem 'growl', require: false
     gem 'rb-fsevent', require: false
-    gem 'growl-rspec', require: false
   end
   gem 'capybara', '~> 1.0'
   gem 'spork-rails'
