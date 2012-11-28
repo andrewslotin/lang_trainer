@@ -9,13 +9,13 @@ LangTrainer::Application.routes.draw do
   resources :dictionaries do
     resources :books
     resources :entries
-
-    post :ignore, on: :member
   end
 
   resources :books do
     resources :chapters do
-      resources :entries
+      resources :entries do
+        post :ignore, on: :member
+      end
     end
   end
 end

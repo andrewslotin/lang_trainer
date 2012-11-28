@@ -21,7 +21,7 @@ describe Dictionary do
       context "for each book" do
         it "calls Book#ignore_word with given word" do
           books.each do |book|
-            book.should_receive :ignore_word, with: word
+            book.should_receive(:ignore_word).with word
           end
 
           subject.ignore_word word

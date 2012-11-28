@@ -41,13 +41,13 @@ FactoryGirl.define do
 
     title { generate(:book_title) }
 
-    #factory :book_with_chapters do
-    #  ignore do
-    #    chapters_count 5
-    #  end
-    #
-    #  chapters { (0...3).map { |i| FactoryGirl.build(:chapter) } }
-    #end
+    factory :book_with_chapters do
+      ignore do
+        chapters_count 5
+      end
+    
+      chapters { (0...3).map { |i| FactoryGirl.build(:chapter) } }
+    end
   end
 
   factory :chapter do

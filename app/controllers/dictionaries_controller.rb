@@ -7,10 +7,4 @@ class DictionariesController < InheritedResources::Base
       failure.html { render "new" }
     end
   end
-
-  def ignore
-    resource.ignore_word params[:word] if params[:word].presence
-
-    redirect_to :back
-  end
 end

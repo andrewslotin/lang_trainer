@@ -28,7 +28,7 @@ class Dictionary
           "$pull" => { entries: { word: word }}
       )
 
-      self.books.each { |book| book.ignore_word word }
+      books.each { |book| book.ignore_word word }
     end
   end
 end
