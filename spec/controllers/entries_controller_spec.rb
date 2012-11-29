@@ -33,7 +33,7 @@ describe EntriesController do
     end
 
     it "should redirect back" do
-      post :ignore, book_id: book._id, chapter_id: chapter._id, id: entry._id
+      put :ignore, book_id: book._id, chapter_id: chapter._id, id: entry._id
 
       expect(response).to redirect_to referrer_address
     end
@@ -41,7 +41,7 @@ describe EntriesController do
     it "should call Dictionary#ignore_word with given Entry#word" do
       dictionary.should_receive(:ignore_word).with entry.word
 
-      post :ignore, book_id: book._id, chapter_id: chapter._id, id: entry._id
+      put :ignore, book_id: book._id, chapter_id: chapter._id, id: entry._id
     end
     
   end
