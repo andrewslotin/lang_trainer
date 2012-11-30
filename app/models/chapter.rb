@@ -40,6 +40,7 @@ class Chapter
   def self.build_entries(text)
     text.gsub(/[^a-zäöüëßа-я'’\s-]/i, "").gsub(/\s+['’-]|['’-]\s+/, "")
         .split(/\s+/)
+        .select { |w| w.present? }
         .group_by { |w| Unicode::downcase(w) }
         .map { |k, v| Entry.new(word: v.first, frequency: v.size) }
   end
