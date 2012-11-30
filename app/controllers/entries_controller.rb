@@ -10,8 +10,18 @@ class EntriesController < InheritedResources::Base
     end
   end
 
+  def complete
+    resource.dictionary << resource
+    resource.destroy
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: { result: "ok" } }
+    end
+  end
+
   def ignore
-    parent.dictionary.ignore_word resource.word
+    resource.dictionary.ignore_word resource.word
 
     respond_to do |format|
       format.html { redirect_to :back }

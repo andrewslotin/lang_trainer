@@ -22,14 +22,6 @@ class Entry
     dictionary.lang
   end
 
-  def ignore!
-    dictionary.ignore word
-
-    dictionary.save &&
-    (!source.is_a?(Chapter) || source.update_attribute(:words_count, source.words_count - frequency)) &&
-    self.destroy
-  end
-
   def translations
     url = "http://m.slovari.yandex.ru/search.xml?text=#{CGI::escape(word)}&lang=#{dictionary.lang}"
 
