@@ -16,7 +16,7 @@ class Book
   def progress
     unless chapters.empty?
       chapters.sum { |chapter| chapter.progress } / chapters.size
-    end.to_i
+    end.to_f
   end
 
   def ignore_word(word)

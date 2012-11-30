@@ -1,0 +1,20 @@
+.page-header
+  %h1= parent.title
+  %em= "by #{parent.author}"
+%table.table
+  %thead
+    %th( style="width: 1%" )
+    %th= resource_class.human_attribute_name :title
+    %th= resource_class.human_attribute_name :words_number
+    %th= resource_class.human_attribute_name :progress
+  %tbody
+    - collection.each_with_index do |chapter, i|
+      %tr
+        %td= "#{i + 1}."
+        %td= link_to chapter.title, book_chapter_path(parent, chapter)
+        %td= chapter.entries.size
+        %td
+          .progress.bar-success{ style: "margin-bottom: 0", title: format_percentage(chapter.progress) }
+            .bar{ style: "width: #{format_percentage(chapter.progress)}" }
+
+= link_to "Add a chapter", new_book_chapter_path(parent)

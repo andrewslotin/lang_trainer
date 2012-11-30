@@ -18,12 +18,12 @@
       - collection.each do |book|
         %tr
           %td= book.author
-          %td= link_to book.title, book
+          %td= link_to book.title, book_chapters_path(book)
           %td
             = book.chapters.sum do |ch|
               - ch.entries.size
           %td
-            .progress.bar-success{ style: "margin-bottom: 0" }
-              .bar{ style: "width: #{ book.progress * 100}%" }
+            .progress.bar-success{ style: "margin-bottom: 0", title: format_percentage(book.progress) }
+              .bar{ style: "width: #{format_percentage(book.progress)}" }
 
   = link_to "Create new book", parent ? new_dictionary_book_path(parent) : new_book_path
