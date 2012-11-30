@@ -5,7 +5,9 @@
   %ul.nav.pull-right
     %li.divider-vertical
       = link_to "javascript:void(0)", class: "dropdown-toggle", data: { toggle: "dropdown" } do
+        %i.icon-user
         = current_user.name
         %b.caret
       %ul.dropdown-menu
-        %li= link_to "Sign out", signout_path
+        %li
+          = link_to "Sign out", signout_path
