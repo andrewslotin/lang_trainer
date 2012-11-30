@@ -2,11 +2,9 @@
 
 body {
   padding-top: 65px;
-
-  .page-header {
-    margin-top: -25px;
-  }
+  .page-header { margin-top: -25px; }
 }
+.alert ul { margin-bottom: 0; }
 
 @import "bootstrap-responsive";
-@import "font-awesome"
+@import "font-awesome";

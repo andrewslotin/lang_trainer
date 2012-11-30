@@ -1,3 +1,4 @@
+= render "application/errors", object: resource
 = form_for [parent, resource], html: { multipart: true } do |f|
   .accordion#chapterContent
     .accordion-group
