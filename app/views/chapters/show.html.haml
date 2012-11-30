@@ -3,9 +3,9 @@
 %table.table.table-striped
   - resource.entries.each do |entry|
     %tr
-      -#%td( style="width: 1%" )
-      -#  = link_to "javascript:void(0)" do
-      -#    %i.icon-pencil
+      %td( style="width: 1%" )
+        = link_to edit_book_chapter_entry_path(parent, resource, entry) do
+          %i.icon-pencil
       %td{ title: pluralize(entry.frequency, "time", "times") }
         = link_to_translation entry
       %td= link_to "Add to dictionary", complete_book_chapter_entry_path(parent, resource, entry), method: :put

@@ -1,4 +1,5 @@
-= form_for [parent, resource], html: { class: "form-horizontal" } do |f|
+= form_for resource, url: params.reject { |k, v| k == :entry }.update( action: resource.persisted? ? :update : :create ),
+                     html: { class: "form-horizontal" } do |f|
   .control-group
     = f.label :word, class: "control-label"
     .controls
