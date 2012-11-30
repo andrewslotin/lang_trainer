@@ -14,7 +14,9 @@ class Book
   delegate :user, :lang, to: :dictionary, allow_nil: true
 
   def progress
-    chapters.sum { |chapter| chapter.progress } / chapters.size
+    unless chapters.empty?
+      chapters.sum { |chapter| chapter.progress } / chapters.size
+    end.to_i
   end
 
   def ignore_word(word)
