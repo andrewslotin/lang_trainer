@@ -14,7 +14,7 @@ LangTrainer::Application.routes.draw do
   end
 
   resources :books do
-    resources :chapters do
+    resources :chapters, except: [:index] do
       resources :entries do
         put :ignore, on: :member
         put :complete, on: :member
