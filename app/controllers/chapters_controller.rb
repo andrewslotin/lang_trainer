@@ -13,7 +13,7 @@ class ChaptersController < InheritedResources::Base
     params[:chapter][:title] = params[:chapter][:title].presence || text[/.+?$/].strip
 
     build_resource
-    resource.entries = resource_class.build_entries(text, book.lang == "de")
+    resource.entries = resource_class.build_entries(text, parent.lang == "de")
 
     super
   end
