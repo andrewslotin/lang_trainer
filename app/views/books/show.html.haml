@@ -10,12 +10,16 @@
           %th( style="width: 1%" ) #
           %th= Chapter.human_attribute_name :title
           %th( style="width: 1%" )= Chapter.human_attribute_name :progress
+          %th( style="width: 1%" ) &nbsp;
       %tbody
         - resource.chapters.each_with_index do |chapter, i|
           %tr
             %td= i + 1
             %td= link_to chapter.title, book_chapter_path(resource, chapter)
             %td= format_percentage(chapter.progress)
+            %td
+              = link_to book_chapter_path(resource, chapter), method: :delete do
+                %i.icon-trash
       %tfoot
         %tr
           %td &nbsp;

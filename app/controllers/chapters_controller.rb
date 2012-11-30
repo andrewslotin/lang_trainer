@@ -18,4 +18,10 @@ class ChaptersController < InheritedResources::Base
 
     super
   end
+
+  def destroy
+    super do |format|
+      format.html { redirect_to parent }
+    end
+  end
 end
