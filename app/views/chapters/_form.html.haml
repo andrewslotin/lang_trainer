@@ -3,18 +3,22 @@
   .accordion#chapterContent
     .accordion-group
       .accordion-heading
-        %a.accordion-toggle(data-toggle="collapse" data-parent="#chapterContent" href="#collapseFile")
-          From file
-      #collapseFile.accordion-body.collapse.in
-        .accordion-inner
-          = f.file_field :content
-    .accordion-group
-      .accordion-heading
         %a.accordion-toggle(data-toggle="collapse" data-parent="#chapterContent" href="#collapseText")
           Paste text
-      #collapseText.accordion-body.collapse
+      #collapseText.accordion-body.collapse.in
         .accordion-inner
           = f.text_area :content, value: "", style: "width: 99%"
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle(data-toggle="collapse" data-parent="#chapterContent" href="#collapseFile")
+          From file
+      #collapseFile.accordion-body.collapse
+        .accordion-inner
+          %p.text-warning
+            Only *.txt files are allowed, chapters will not be detected.
+            If you would like your book to be separated by chapters, please upload one file per chapter
+            or use the option above.
+          = f.file_field :content
   .control-group
     .controls
       = f.submit class: "btn btn-primary"
