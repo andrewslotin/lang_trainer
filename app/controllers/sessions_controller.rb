@@ -7,8 +7,6 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
-    render json: request
-    return
     user = User.where("identities.provider" => auth['provider'], "identities.uid" => auth["uid"].to_s).first || User.create_with_omniauth(auth)
 
     session[:user_id] = user.id
