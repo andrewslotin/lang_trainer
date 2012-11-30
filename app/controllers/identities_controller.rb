@@ -13,10 +13,10 @@ class IdentitiesController < ApplicationController
            end
 
 
-    identity = Identities::Common(provider:              :identity,
-                                  email:                 params[:email],
-                                  password:              params[:password],
-                                  password_confirmation: params[:password])
+    identity = Identities::Common.new(provider:              :identity,
+                                      email:                 params[:email],
+                                      password:              params[:password],
+                                      password_confirmation: params[:password])
     user.identities << identity
 
     if user.save
