@@ -11,13 +11,15 @@ class EntriesController < InheritedResources::Base
   end
 
   def update
-    existing_entry = parent.entries.where(word: params[:entry][:word]).first
+    existing_entry = if params[:entry][:word] != resource.word
+                       parent.entries.where(word: params[:entry][:word]).first
+                     end
 
     if existing_entry
       existing_entry.inc(:frequency, resource.frequency)
       resource.destroy
     else
-      resource.word = params[:entry][:word]
+      resource.update_attributes params[:entry]
       resource.save
     end
 
