@@ -7,6 +7,7 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-identity'
 gem 'haml'
 gem 'haml-rails'
 gem 'inherited_resources'
@@ -21,6 +22,7 @@ group :assets do
 end
 
 gem 'bootstrap-sass'
+gem 'font-awesome-sass-rails'
 gem 'jquery-rails'
 
 group :development do

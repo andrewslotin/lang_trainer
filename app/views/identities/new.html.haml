@@ -1,0 +1,19 @@
+.page-header
+  %h1 New account
+
+= form_tag "/auth/identity/register", class: "form-horizontal" do |f|
+  .control-group
+    = label_tag :name, "Name", class: "control-label"
+    .controls
+      = text_field_tag :name, @identity[:name]
+  .control-group
+    = label_tag :email, "Email", class: "control-label"
+    .controls
+      = text_field_tag :email, @identity[:email]
+  .control-group
+    = label_tag :password, "Password", class: "control-label"
+    .controls
+      = password_field_tag :password
+  .control-group
+    .controls
+      = submit_tag "Register", class: "btn btn-primary"

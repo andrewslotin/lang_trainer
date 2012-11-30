@@ -7,14 +7,21 @@ FactoryGirl.define do
   sequence(:word_seq) { |n| "word#{n}" }
 
   factory :user do
-    uid { generate :uid }
     name { Faker::Name.name }
+    identities []
 
-    trait :twitter do
+    factory :twitter_user do
+      identities { [FactoryGirl.build(:twitter_identity)] }
+    end
+  end
+
+  factory :identity do
+    uid { generate :uid }
+    provider :developer
+
+    factory :twitter_identity do
       provider :twitter
     end
-
-    factory :twitter_user, traits: [:twitter]
   end
 
   factory :dictionary do
@@ -22,7 +29,7 @@ FactoryGirl.define do
     lang :en
     ignored_words []
 
-    association :user, :twitter
+    association :user
 
     factory :dictionary_with_books do
       ignore do

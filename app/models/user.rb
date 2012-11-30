@@ -1,23 +1,34 @@
 class User
   include Mongoid::Document
 
-  field :provider, type: String
-  field :uid,      type: String
-  field :name,     type: String
+  field :name,  type: String
+  field :email, type: String
   attr_accessible :provider, :uid, :name
 
-  has_many :dictionaries
+  has_many :dictionaries, dependent: :destroy
+  embeds_many :identities
 
   def self.create_with_omniauth(auth)
-    auth['info'] ||= {}
-
-    options = {
-        provider: auth['provider'],
-        uid: auth['uid'],
-        name: auth['info']['name'],
-        email: auth['info']['email']
+    identity = { 
+      provider: auth['provider'], 
+      uid: auth['uid'],
+      password: auth['password'],
+      password_confirmation: auth['password_confirmation']
     }
 
-    self.create(options)
+    auth['info'] ||= {}
+
+    self.create do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+      u.identities = [identity]
+    end
+  end
+
+  def self.authenticate(key, password)
+    user = where("identities.email" => key).first
+    if user
+      user.identities.select { |i| i.provider == :identity && i.authenticate(password) }.first
+    end
   end
 end

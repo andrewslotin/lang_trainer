@@ -8,7 +8,7 @@ feature 'Authorization', %q{
   let!(:user) { FactoryGirl.create :twitter_user }
 
   scenario "authorization with twitter" do
-    login_with :twitter, uid: user.uid, info: { name: user.name }
+    login_with :twitter, uid: user.identities.first.uid, info: { name: user.name }
 
     visit dictionaries_path
 

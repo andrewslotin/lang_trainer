@@ -1,0 +1,21 @@
+.hero-unit
+  .page-header
+    %h1 Welcome to Lang Trainer
+
+  = form_tag "/auth/identity/callback", class: "form-horizontal" do
+    .control-group
+      = label_tag :auth_key, "E-mail", class: "control-label"
+      .controls
+        = text_field_tag :auth_key
+    .control-group
+      = label_tag :password, "Password", class: "control-label"
+      .controls
+        = password_field_tag :password
+    .control-group
+      .controls
+        = submit_tag "Sign in", class: "btn btn-primary"
+        %small
+          = link_to "or register", new_identity_path
+  = link_to "/auth/twitter", class: "btn" do
+    %i.icon-twitter
+    Sign in with Twitter
