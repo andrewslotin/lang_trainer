@@ -10,6 +10,22 @@ class EntriesController < InheritedResources::Base
     end
   end
 
+  def update
+    existing_entry = parent.entries.where(word: params[:entry][:word]).first
+
+    if existing_entry
+      existing_entry.inc(:frequency, resource.frequency)
+      resource.destroy
+    else
+      resource.update_attribute :word, params[:entry][:word]
+    end
+
+    respond_with_dual_blocks(resource, {}) do |success, failure|
+      success.html { redirect_to action: :index }
+      failure.html { render "edit" }
+    end
+  end
+
   def complete
     resource.dictionary << resource
     resource.destroy
