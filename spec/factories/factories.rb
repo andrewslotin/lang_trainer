@@ -16,7 +16,6 @@ FactoryGirl.define do
   end
 
   factory :identity do
-    uid { generate :uid }
     provider :developer
 
     factory :twitter_identity do

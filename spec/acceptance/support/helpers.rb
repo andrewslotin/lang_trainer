@@ -1,7 +1,6 @@
 module HelperMethods
-  # Put helper methods you need to be available in all acceptance specs here.
   def logged_in?
-    page.has_selector? "a", text: "Login"
+    page.has_no_content? "Sign in"
   end
 
   def login_with(provider, mock_options)
