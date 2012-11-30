@@ -48,7 +48,7 @@ class EntriesController < InheritedResources::Base
 
   def destroy
     super do |format|
-      format.html { redirect_to parent }
+      format.html { redirect_to action: :index }
     end
   end
 end
