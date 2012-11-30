@@ -17,7 +17,8 @@ class EntriesController < InheritedResources::Base
       existing_entry.inc(:frequency, resource.frequency)
       resource.destroy
     else
-      resource.update_attribute :word, params[:entry][:word]
+      resource.word = params[:entry][:word]
+      resource.save
     end
 
     respond_with_dual_blocks(resource, {}) do |success, failure|
