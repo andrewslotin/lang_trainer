@@ -17,6 +17,11 @@
             %td= i + 1
             %td= link_to chapter.title, book_chapter_path(resource, chapter)
             %td= format_percentage(chapter.progress)
-    .btn-toolbar
-      = link_to "Add a chapter", new_book_chapter_path(resource), class: "btn"
-      = link_to "Back to books", books_url, class: "btn btn-link"
+      %tfoot
+        %tr
+          %td &nbsp;
+          %td
+            %i
+              = link_to "Add a chapter", new_book_chapter_path(resource)
+
+    = link_to "Back to books", books_url
