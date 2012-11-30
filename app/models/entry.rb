@@ -10,7 +10,17 @@ class Entry
 
   validates :word, presence: true, uniqueness: true
 
-  delegate :dictionary, to: :source
+  def dictionary
+    if source.is_a? Dictionary
+      source
+    else
+      source.dictionary
+    end
+  end
+
+  def lang
+    dictionary.lang
+  end
 
   def ignore!
     dictionary.ignore word
