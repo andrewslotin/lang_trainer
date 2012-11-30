@@ -1,5 +1,5 @@
 LangTrainer::Application.routes.draw do
-  root to: "application#index"
+  root to: "dictionaries#index"
 
   match '/auth/:provider/callback' => 'sessions#create'
   match '/signin'                  => 'sessions#new',     as: :signin
