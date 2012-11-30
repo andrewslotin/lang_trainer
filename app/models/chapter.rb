@@ -37,10 +37,11 @@ class Chapter
     end
   end
 
-  def self.build_entries(text)
+  def self.build_entries(text, case_sensitive = false)
     text.gsub(/[^a-zäöüëßа-я'’\s-]/i, "").gsub(/\s+['’-]|['’-]\s+/, "")
         .split(/\s+/)
         .select { |w| w.present? }
+        .group_by { |w| case_sensitive ? w : Unicode::downcase(w) }
         .map { |k, v| Entry.new(word: v.first, frequency: v.size) }
   end
 end
