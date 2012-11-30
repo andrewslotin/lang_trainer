@@ -10,8 +10,8 @@ class ChaptersController < InheritedResources::Base
              params[:chapter].delete(:content).tempfile.read.force_encoding("UTF-8")
            end
 
-    params[:chapter][:title] = params[:chapter][:title].presence || text[/.+?$/].strip[/^(.{,50}.*?)\s$/]
-    params[:chapter][:title].size = "#{params[:chapter][:title].strip[/^(.{,100}.*?)\s/, 1]}…" if params[:chapter][:title].size > 100
+    params[:chapter][:title] = params[:chapter][:title].presence || text[/.+?$/].strip
+    params[:chapter][:title] = "#{params[:chapter][:title].strip[/^(.{,100}.*?)\s/, 1]}…" if params[:chapter][:title].size > 100
 
     build_resource
     resource.entries = resource_class.build_entries(text, parent.lang == "de")
