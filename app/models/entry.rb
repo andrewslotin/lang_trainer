@@ -35,6 +35,7 @@ class Entry
 
   def preserve_word_in_variants
     self.variants << self.word_was if self.word_changed? && self.word_was.present? && ! self.variants.include?(self.word_was)
+    self.variants.delete self.word
 
     true
   end
