@@ -6,9 +6,9 @@
     .controls
       = f.text_field :word
   .control-group
-    = f.label :notes, class: "notes"
+    = f.label :notes, class: "control-label"
     .controls
-      = f.text_area :notes
+      = f.text_area :notes, rows: 5, class: "input-xxlarge"
   .control-group
     .controls
       = f.submit class: "btn btn-primary"
