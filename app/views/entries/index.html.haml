@@ -16,9 +16,11 @@
         %td{ title: pluralize(entry.frequency, "time", "times") }
           = link_to_translation entry
           - if entry.variants.present?
-            %p.muted
-              %small
-                = entry.variants.join(", ")
+            %em.muted
+              &mdash;
+              = entry.variants.join(", ")
+          - if entry.notes.present?
+            = simple_format entry.notes, class: "muted"
         - if parent.is_a? Chapter
           %td= link_to "Add to dictionary", complete_book_chapter_entry_path(parent.book, parent, entry), method: :put
           %td= link_to "Ignore", ignore_book_chapter_entry_path(parent.book, parent, entry), method: :put
