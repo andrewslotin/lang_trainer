@@ -72,5 +72,13 @@ FactoryGirl.define do
   factory :entry do
     word { generate(:word_seq) }
     frequency { rand(1000) }
+
+    factory :entry_with_variants do
+      ignore do
+        variants_count 5
+      end
+
+      variants { (0..5).map { generate(:word_seq) } }
+    end
   end
 end

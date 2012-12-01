@@ -17,7 +17,8 @@ class Dictionary
       existing_entry = entries.where(word: entry.word).first
 
       if existing_entry
-        existing_entry.update_attribute(:frequency, existing_entry.frequency.to_i + entry.frequency.to_i)
+        existing_entry.update_attributes frequency: existing_entry.frequency.to_i + entry.frequency.to_i,
+                                         variants: (existing_entry.variants + entry.variants).uniq
       else
         self.entries.build entry.attributes
       end
@@ -29,8 +30,8 @@ class Dictionary
   def ignore_word(word)
     unless ignored_words.include? word
       self.class.collection.where(_id: self._id).update(
-          "$push" => { ignored_words: word },
-          "$pull" => { entries: { word: word }}
+        "$push" => { ignored_words: word },
+        "$pull" => { entries: { word: word }}
       )
 
       books.each { |book| book.ignore_word word }
