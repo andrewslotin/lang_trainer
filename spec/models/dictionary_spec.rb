@@ -15,21 +15,10 @@ describe Dictionary do
         expect { subject << entry }.not_to change { subject.entries }
       end
 
-      it "increments the existing entry frequency by the frequency of passed one" do
-        expect { subject << entry }.to change { existing_entry.frequency }.by entry.frequency
-      end
+      it "merges the passed entry with an existing one" do
+        existing_entry.should_receive(:merge).with(entry).once
 
-      it "updates the existing entry variants with variants of passed one" do
         subject << entry
-
-        expect(existing_entry.variants).to match_array (entry.variants + existing_entry.variants - [existing_entry.word]).uniq
-      end
-
-      it "appends notes from the given entry to notes of existing one" do
-        entry.notes = "aaa"
-        existing_entry.notes = "bbb"
-
-        expect { subject << entry }.to change { existing_entry.notes }.to "bbb\naaa"
       end
     end
 
