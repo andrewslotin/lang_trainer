@@ -13,6 +13,13 @@ class Entry
 
   before_validation :preserve_word_in_variants
 
+  def merge(entry)
+    self.frequency += entry.frequency
+    self.variants = (self.variants + entry.variants + [entry.word] - [self.word]).uniq
+
+    self
+  end
+
   def dictionary
     if source.is_a? Dictionary
       source

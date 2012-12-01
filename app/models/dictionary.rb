@@ -21,8 +21,7 @@ class Dictionary
       existing_entry = self[entry.word].first
 
       if existing_entry
-        existing_entry.update_attributes frequency: existing_entry.frequency.to_i + entry.frequency.to_i,
-                                         variants: (existing_entry.variants + entry.variants - [existing_entry.word]).uniq
+        existing_entry.merge entry
       else
         self.entries.build entry.attributes
       end
