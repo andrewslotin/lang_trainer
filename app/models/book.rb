@@ -1,5 +1,6 @@
 class Book
   include Mongoid::Document
+  include Mongoid::Timestamps::Created
 
   field :author, type: String
   field :title, type: String
@@ -12,6 +13,10 @@ class Book
   embeds_many :chapters
   
   delegate :user, :lang, to: :dictionary, allow_nil: true
+
+  def created_at
+    super || 10.years.ago
+  end
 
   def progress
     unless chapters.empty?

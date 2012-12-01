@@ -15,7 +15,7 @@
         %th= resource_class.human_attribute_name :entries
         %th= resource_class.human_attribute_name :progress
     %tbody
-      - collection.each do |book|
+      - collection.sort_by(&:created_at).reverse.each do |book|
         %tr
           %td= book.author
           %td= link_to book.title, book_path(book)
