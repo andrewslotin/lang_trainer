@@ -20,8 +20,10 @@ describe Entry do
   describe "before save" do
     context "when the 'word' was changed" do
       let!(:orig_word) { entry.word }
+      let!(:new_word) { "#{entry.word}updated" }
+
       before do
-        entry.word = "#{entry.word}updated"
+        entry.word = new_word
       end
 
       it "stores the original value in 'variants' on save" do
@@ -37,6 +39,16 @@ describe Entry do
 
         it "does not store duplicate value" do
           expect { entry.save! }.not_to change { entry.variants }
+        end
+      end
+
+      context "when the new value is already in 'variants'" do
+        before do
+          entry.variants = [new_word]
+        end
+
+        it "removes this variant" do
+          expect { entry.save! }.to change { entry.variants }.to [orig_word]
         end
       end
     end
