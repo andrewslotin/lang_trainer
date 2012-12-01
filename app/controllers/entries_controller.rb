@@ -31,7 +31,7 @@ class EntriesController < InheritedResources::Base
 
   def complete
     resource.dictionary << resource
-    resource.destroy
+    resource.dictionary.save && resource.destroy
 
     respond_to do |format|
       format.html { redirect_to :back }

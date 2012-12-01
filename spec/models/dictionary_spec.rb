@@ -6,18 +6,7 @@ describe Dictionary do
   let(:entry) { FactoryGirl.build :entry_with_variants }
 
   describe "<<" do
-    context "when the given entry.word is in 'ignored_words' list" do
-      before do
-        subject.ignored_words << entry.word
-      end
-
-      it "does not add the entry to collection" do
-        expect { subject << entry }.not_to change { subject.entries }
-      end
-    end
-
-    context "when there is an entry with the same word in 'entries'" do
-      let(:existing_entry) { FactoryGirl.build :entry_with_variants, word: entry.word }
+    shared_examples_for "merging existing entries" do
       before do
         subject.entries << existing_entry
       end
@@ -34,6 +23,42 @@ describe Dictionary do
         subject << entry
 
         expect(existing_entry.variants).to match_array (entry.variants + existing_entry.variants).uniq
+      end
+    end
+
+    context "when the given entry.word is in 'ignored_words' list" do
+      before do
+        subject.ignored_words << entry.word
+      end
+
+      it "does not add the entry to collection" do
+        expect { subject << entry }.not_to change { subject.entries }
+      end
+    end
+
+    context "when there is an entry with the same word in 'entries'" do
+      let(:existing_entry) { FactoryGirl.build :entry_with_variants, word: entry.word }
+
+      it_should_behave_like "merging existing entries"
+    end
+
+    context "when there is an entry with the same word in variants" do
+      let(:existing_entry) { FactoryGirl.build :entry_with_variants, variants: [entry.word] }
+
+      before do
+        subject.entries << existing_entry
+      end
+
+      context "when the given entry has an existing_entry.word as a variant" do
+        before do
+          entry.variants << existing_entry.word
+        end
+
+        it "should not put that variant to existing_entry.variants" do
+          subject << entry
+
+          expect(existing_entry.variants).not_to include existing_entry.word
+        end
       end
     end
 
