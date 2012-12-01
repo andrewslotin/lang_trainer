@@ -6,6 +6,7 @@ class Entry
   field :word, type: String
   field :frequency, type: Integer, default: 0
   field :variants, type: Array, default: []
+  field :notes, type: String, default: ""
 
   embedded_in :source, polymorphic: true, inverse_of: :entries
 
@@ -16,6 +17,7 @@ class Entry
   def merge(entry)
     self.frequency += entry.frequency
     self.variants = (self.variants + entry.variants + [entry.word] - [self.word]).uniq
+    self.notes += "\n#{entry.notes}"
 
     self
   end

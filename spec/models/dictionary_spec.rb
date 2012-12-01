@@ -24,6 +24,13 @@ describe Dictionary do
 
         expect(existing_entry.variants).to match_array (entry.variants + existing_entry.variants - [existing_entry.word]).uniq
       end
+
+      it "appends notes from the given entry to notes of existing one" do
+        entry.notes = "aaa"
+        existing_entry.notes = "bbb"
+
+        expect { subject << entry }.to change { existing_entry.notes }.to "bbb\naaa"
+      end
     end
 
     context "when the given entry.word is in 'ignored_words' list" do
