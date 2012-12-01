@@ -12,9 +12,13 @@ class Dictionary
   validates :lang, presence: true
   validates :title, presence: true, uniqueness: { scope: :lang }
 
+  def [](key)
+    entries.any_of({word: key}, {:variants.in => [key]})
+  end
+
   def <<(entry)
     unless ignored_words.include? entry.word
-      existing_entry = entries.any_of({word: entry.word}, {:variants.in => [entry.word]}).first
+      existing_entry = self[entry.word].first
 
       if existing_entry
         existing_entry.update_attributes frequency: existing_entry.frequency.to_i + entry.frequency.to_i,

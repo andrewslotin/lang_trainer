@@ -22,7 +22,7 @@ describe Dictionary do
       it "updates the existing entry variants with variants of passed one" do
         subject << entry
 
-        expect(existing_entry.variants).to match_array (entry.variants + existing_entry.variants).uniq
+        expect(existing_entry.variants).to match_array (entry.variants + existing_entry.variants - [existing_entry.word]).uniq
       end
     end
 
@@ -54,10 +54,12 @@ describe Dictionary do
           entry.variants << existing_entry.word
         end
 
-        it "should not put that variant to existing_entry.variants" do
-          subject << entry
+        it_should_behave_like "merging existing entries" do
+          it "should not put that variant to existing_entry.variants" do
+            subject << entry
 
-          expect(existing_entry.variants).not_to include existing_entry.word
+            expect(existing_entry.variants).not_to include existing_entry.word
+          end
         end
       end
     end

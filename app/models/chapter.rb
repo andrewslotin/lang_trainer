@@ -17,7 +17,7 @@ class Chapter
 
   def entries=(value)
     known_entries = value.to_a.select do |w|
-      dictionary << w if dictionary.entries.where(word: w.word).exists?
+      dictionary << w if dictionary[w.word].exists?
     end
 
     self[:entries] = value.to_a.reject do |w| 
