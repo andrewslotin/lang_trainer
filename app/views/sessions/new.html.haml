@@ -6,14 +6,14 @@
     .control-group
       = label_tag :auth_key, "E-mail", class: "control-label"
       .controls
-        = text_field_tag :auth_key
+        = text_field_tag :auth_key, "", placeholder: "E-mail"
         = link_to "/auth/twitter", class: "btn" do
           %i.icon-twitter
           Sign in with Twitter
     .control-group
       = label_tag :password, "Password", class: "control-label"
       .controls
-        = password_field_tag :password
+        = password_field_tag :password, "", placeholder: "Password"
     .control-group
       .controls
         = submit_tag "Sign in", class: "btn btn-primary"

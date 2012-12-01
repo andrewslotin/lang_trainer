@@ -1,19 +1,43 @@
 .page-header
   %h1 New account
 
+:javascript
+  function togglePasswordField(link) {
+    var type = "text";
+
+    if ($('#password').attr("type") == "text") {
+      type = "password";
+    }
+
+    $("#password").each(function () {
+      $('<input type="' + type + '"/>').attr({
+        name:    this.name,
+        value:   this.value,
+        id:      this.id,
+        "class": this.className
+      }).insertBefore(this);
+    }).remove();
+    $("i", link).toggleClass("icon-eye-open")
+                .toggleClass("icon-eye-close");
+  }
+
 = form_tag "/auth/identity/register", class: "form-horizontal" do |f|
   .control-group
     = label_tag :name, "Name", class: "control-label"
     .controls
-      = text_field_tag :name, @identity[:name]
+      = text_field_tag :name, @identity[:name], placeholder: "Your name"
   .control-group
     = label_tag :email, "Email", class: "control-label"
     .controls
-      = text_field_tag :email, @identity[:email]
+      = text_field_tag :email, @identity[:email], placehoder: "Your e-mail"
+      %small.muted will be used as login
   .control-group
     = label_tag :password, "Password", class: "control-label"
     .controls
-      = password_field_tag :password
+      .input-append
+        = password_field_tag :password, "", placeholder: "Password"
+        = link_to "javascript:void(0)", class: "btn", onclick: "togglePasswordField(this)", title: "Click to show/hide password" do
+          %i.icon-eye-open
   .control-group
     .controls
       = submit_tag "Register", class: "btn btn-primary"
