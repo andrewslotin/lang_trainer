@@ -1,5 +1,9 @@
 = render "application/errors", object: resource
 = form_for [parent, resource], html: { multipart: true } do |f|
+  .control-group
+    = f.label :title, class: "control-label"
+    .controls
+      = f.text_field :title, class: "input-block-level", placeholder: "Leave this field blank to use first few words as a title"
   .accordion#chapterContent
     .accordion-group
       .accordion-heading
