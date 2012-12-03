@@ -3,6 +3,8 @@ require 'open-uri'
 class Entry
   include Mongoid::Document
 
+  paginates_per 25
+
   field :word, type: String
   field :frequency, type: Integer, default: 0
   field :variants, type: Array, default: []

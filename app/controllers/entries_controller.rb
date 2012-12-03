@@ -3,6 +3,8 @@ class EntriesController < InheritedResources::Base
     belongs_to :dictionary, :chapter, polymorphic: true
   end
 
+  has_scope :page, default: 1
+
   def create
     super do |success, failure|
       success.html { redirect_to :back }

@@ -13,9 +13,11 @@ gem 'omniauth-identity'
 gem 'haml'
 gem 'haml-rails'
 gem 'inherited_resources'
+gem 'has_scope'
 gem 'cancan'
 gem 'unicode'
 gem 'nokogiri'
+gem 'kaminari'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
