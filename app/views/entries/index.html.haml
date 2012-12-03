@@ -27,4 +27,7 @@
           %td= link_to "Add to dictionary", complete_book_chapter_entry_path(parent.book, parent, entry), method: :put
           %td= link_to "Ignore", ignore_book_chapter_entry_path(parent.book, parent, entry), method: :put
 
+- if parent.is_a? Dictionary
+  = link_to "Add an entry", new_dictionary_entry_path(parent)
+
 = paginate collection

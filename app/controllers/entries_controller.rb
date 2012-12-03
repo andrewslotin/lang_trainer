@@ -6,8 +6,13 @@ class EntriesController < InheritedResources::Base
   has_scope :page, default: 1
 
   def create
-    super do |success, failure|
-      success.html { redirect_to :back }
+    if parent.is_a? Dictionary
+      parent << build_resource
+      parent.save
+    end
+
+    respond_with_dual_blocks(parent, {}) do |success, failure|
+      success.html { redirect_to action: :index }
       failure.html { render "new" }
     end
   end

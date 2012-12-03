@@ -1,4 +1,4 @@
-= render "application/errors", object: resource
+= render "application/errors", object: [resource, parent]
 = form_for resource, url: params.reject { |k, v| k == :entry }.update( action: resource.persisted? ? :update : :create ),
                      html: { class: "form-horizontal" } do |f|
   .control-group
