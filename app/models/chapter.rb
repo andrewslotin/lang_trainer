@@ -12,7 +12,11 @@ class Chapter
   delegate :dictionary, to: :book
 
   def progress
-    1 - entries.sum { |entry| entry.frequency } / words_number.to_f
+    if words_number > 0
+      1 - entries.sum { |entry| entry.frequency } / words_number.to_f
+    else
+      1
+    end
   end
 
   def entries=(value)
