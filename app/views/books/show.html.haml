@@ -15,7 +15,7 @@
         - resource.chapters.each_with_index do |chapter, i|
           %tr
             %td= i + 1
-            %td= link_to chapter.title, book_chapter_path(resource, chapter)
+            %td= link_to chapter.title, book_chapter_entries_path(resource, chapter)
             %td= format_percentage(chapter.progress)
             %td
               = link_to book_chapter_path(resource, chapter), method: :delete do
