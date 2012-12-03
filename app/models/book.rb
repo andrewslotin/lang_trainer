@@ -2,6 +2,8 @@ class Book
   include Mongoid::Document
   include Mongoid::Timestamps::Created
 
+  paginates_per 25
+
   field :author, type: String
   field :title, type: String
 
