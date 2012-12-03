@@ -1,6 +1,8 @@
 class Dictionary
   include Mongoid::Document
 
+  paginates_per 25
+
   field :title, type: String
   field :lang, type: String
   field :ignored_words, type: Array, default: []
