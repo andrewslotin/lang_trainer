@@ -35,7 +35,7 @@ describe EntriesController do
       book.stub(:dictionary).and_return dictionary
       Book.stub(:find).with(book.id.to_s).and_return book
       book.stub_chain(:chapters, :find).with(chapter.id.to_s).and_return chapter
-      chapter.stub_chain(:entries, :find).with(entry.id.to_s).and_return entry
+      chapter.stub_chain(:entries, :page, :find).with(entry.id.to_s).and_return entry
     end
 
     let(:referrer_address) { book_chapter_path(book, chapter) }
