@@ -4,27 +4,30 @@
 .row
   .span3
   .span9
-    %table.table.table-striped
-      %thead
-        %tr
-          %th( style="width: 1%" ) #
-          %th= Chapter.human_attribute_name :title
-          %th( style="width: 1%" )= Chapter.human_attribute_name :progress
-          %th( style="width: 1%" ) &nbsp;
-      %tbody
-        - resource.chapters.each_with_index do |chapter, i|
+    - if resource.chapters.empty?
+      = render "chapters/empty_collection", parent: resource
+    - else
+      %table.table.table-striped
+        %thead
           %tr
-            %td= i + 1
-            %td= link_to chapter.title, book_chapter_entries_path(resource, chapter)
-            %td= format_percentage(chapter.progress)
+            %th( style="width: 1%" ) #
+            %th= Chapter.human_attribute_name :title
+            %th( style="width: 1%" )= Chapter.human_attribute_name :progress
+            %th( style="width: 1%" ) &nbsp;
+        %tbody
+          - resource.chapters.each_with_index do |chapter, i|
+            %tr
+              %td= i + 1
+              %td= link_to chapter.title, book_chapter_entries_path(resource, chapter)
+              %td= format_percentage(chapter.progress)
+              %td
+                = link_to book_chapter_path(resource, chapter), method: :delete do
+                  %i.icon-trash
+        %tfoot
+          %tr
+            %td &nbsp;
             %td
-              = link_to book_chapter_path(resource, chapter), method: :delete do
-                %i.icon-trash
-      %tfoot
-        %tr
-          %td &nbsp;
-          %td
-            %i
-              = link_to "Add a chapter", new_book_chapter_path(resource)
+              %i
+                = link_to "Add a chapter", new_book_chapter_path(resource)
 
     = link_to "Back to books", books_url
