@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+window.togglePasswordField = (link) ->
+  type = if $('#password').attr("type") is "text" then "password" else "text"
+
+  $("#password").each ->
+    $('<input type="' + type + '"/>').attr
+      name:  this.name,
+      value: this.value,
+      id:    this.id,
+      class: this.className
+    .insertBefore this
+  .remove();
+  $("i", link).toggleClass("icon-eye-open").toggleClass("icon-eye-close")
