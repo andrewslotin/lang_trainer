@@ -47,6 +47,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    charlock_holmes (0.6.9)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     coderay (1.0.8)
@@ -60,6 +61,7 @@ GEM
     database_cleaner (0.9.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    escape_utils (0.2.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.1.0)
@@ -73,6 +75,13 @@ GEM
     font-awesome-sass-rails (2.0.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
+    gemoji (1.3.0)
+    github-linguist (2.4.0)
+      charlock_holmes (~> 0.6.6)
+      escape_utils (~> 0.2.3)
+      mime-types (~> 1.19)
+      pygments.rb (>= 0.3.0)
+    github-markdown (0.5.3)
     growl (1.0.3)
     growl-rspec (0.0.1)
       growl
@@ -98,6 +107,15 @@ GEM
     has_scope (0.5.1)
     hashie (1.2.0)
     hike (1.2.1)
+    html-pipeline (0.0.6)
+      activesupport (>= 2)
+      escape_utils (~> 0.2)
+      gemoji (~> 1.0)
+      github-linguist (~> 2.1)
+      github-markdown (~> 0.5)
+      nokogiri (~> 1.4)
+      rinku (~> 1.7)
+      sanitize (~> 2.0)
     i18n (0.6.1)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
@@ -144,12 +162,16 @@ GEM
       omniauth-oauth (~> 1.0)
     origin (1.0.11)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
     puma (1.6.3)
       rack (~> 1.2)
+    pygments.rb (0.3.4)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -178,6 +200,7 @@ GEM
       json (~> 1.4)
     responders (0.9.3)
       railties (~> 3.1)
+    rinku (1.7.2)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -194,6 +217,9 @@ GEM
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
     rubyzip (0.9.9)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -229,6 +255,7 @@ GEM
     websocket (1.0.4)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -251,6 +278,7 @@ DEPENDENCIES
   haml
   haml-rails
   has_scope
+  html-pipeline
   inherited_resources
   jquery-rails
   kaminari

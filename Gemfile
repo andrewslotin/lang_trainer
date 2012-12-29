@@ -28,6 +28,7 @@ end
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'jquery-rails'
+gem 'html-pipeline'
 
 group :development do
   gem 'puma'
