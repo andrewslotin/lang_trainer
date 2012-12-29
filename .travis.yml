@@ -4,3 +4,6 @@ script:
 rvm:
   - 1.9.3
 services: mongodb
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq libicu-dev
