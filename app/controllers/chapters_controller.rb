@@ -15,13 +15,13 @@ class ChaptersController < InheritedResources::Base
                                end
     unless params[:chapter][:title].present?
       title = (text[/.+?$/] || "").strip
-      "#{title.strip[/^(.{,100}.*?)\s/, 1]}…" if title.size > 50
+      "#{title.strip[/^(.{,50}.*?)\s/, 1]}…" if title.size > 50
 
       params[:chapter][:title] = title.presence || "#{resource_class.name} #{parent.chapters.size + 1}"
     end
 
     build_resource
-    resource.entries = resource_class.build_entries(text, parent.lang == "de")
+    resource.build_entries_from(text, parent.lang == "de")
 
     super do |success, failure|
       success.html { redirect_to book_chapter_entries_path(parent, resource) }
