@@ -9,12 +9,15 @@ class Entry
   field :frequency, type: Integer, default: 0
   field :variants, type: Array, default: []
   field :notes, type: String, default: ""
+  field :marked, type: Boolean, default: false
 
   embedded_in :source, polymorphic: true, inverse_of: :entries
 
   validates :word, presence: true, uniqueness: true
 
   before_validation :preserve_word_in_variants
+
+  scope :marked, where(marked: true)
 
   def merge(entry)
     self.frequency += entry.frequency
@@ -40,6 +43,20 @@ class Entry
     url = "http://m.slovari.yandex.ru/search.xml?text=#{CGI::escape(word)}&lang=#{dictionary.lang}"
 
     Nokogiri::HTML(open(url).read).css('.b-translate .l1 a').map { |v| v.inner_text }
+  end
+
+  def mark!
+    if source.is_a? Chapter
+      self.marked = true
+      self.save
+    end
+  end
+
+  def unmark!
+    if source.is_a? Chapter
+      self.marked = false
+      self.save
+    end
   end
 
   protected

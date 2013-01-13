@@ -18,6 +18,9 @@ LangTrainer::Application.routes.draw do
       resources :entries do
         put :ignore, on: :member
         put :complete, on: :member
+        put :mark, on: :member
+        put :unmark, on: :member
+        get :learning_list, on: :collection
       end
     end
   end

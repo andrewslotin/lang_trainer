@@ -19,6 +19,10 @@ class Chapter
     end
   end
 
+  def has_marked_entries?
+    self.entries.marked.present?
+  end
+
   def entries=(value)
     known_entries = value.to_a.select do |w|
       dictionary << w if dictionary[w.word].exists?

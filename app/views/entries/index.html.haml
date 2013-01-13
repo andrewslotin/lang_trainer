@@ -25,6 +25,10 @@
             .muted
               = markdown entry.notes
         - if parent.is_a? Chapter
+          - if entry.marked?
+            %td= link_to "Remove from learning list", unmark_book_chapter_entry_path(parent.book, parent, entry), method: :put
+          - else
+            %td= link_to "Add to learning list", mark_book_chapter_entry_path(parent.book, parent, entry), method: :put
           %td= link_to "Add to dictionary", complete_book_chapter_entry_path(parent.book, parent, entry), method: :put
           %td= link_to "Ignore", ignore_book_chapter_entry_path(parent.book, parent, entry), method: :put
 

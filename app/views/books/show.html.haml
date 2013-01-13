@@ -14,12 +14,19 @@
             %th= Chapter.human_attribute_name :title
             %th( style="width: 1%" )= Chapter.human_attribute_name :progress
             %th( style="width: 1%" ) &nbsp;
+            %th( style="width: 1%" ) &nbsp;
         %tbody
           - resource.chapters.each_with_index do |chapter, i|
             %tr
               %td= i + 1
               %td= link_to chapter.title, book_chapter_entries_path(resource, chapter)
               %td= format_percentage(chapter.progress)
+              %td
+                - if chapter.has_marked_entries?
+                  = link_to learning_list_book_chapter_entries_path(resource, chapter) do
+                    %i.icon-list
+                - else
+                  %i.icon-list.muted( title="To start using learning lists add some entries to it." )
               %td
                 = link_to book_chapter_path(resource, chapter), method: :delete do
                   %i.icon-trash

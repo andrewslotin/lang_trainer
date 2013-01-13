@@ -55,6 +55,30 @@ class EntriesController < InheritedResources::Base
     end
   end
 
+  def learning_list
+    @entries = collection.marked
+
+    render :index
+  end
+
+  def mark
+    resource.mark!
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: { result: "ok" } }
+    end
+  end
+
+  def unmark
+    resource.unmark!
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: { result: "ok" } }
+    end
+  end
+
   def destroy
     super do |format|
       format.html { redirect_to action: :index }
