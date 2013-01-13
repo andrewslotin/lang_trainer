@@ -1,4 +1,4 @@
-require 'html/pipeline'
+# require 'html/pipeline'
 
 module ApplicationHelper
   def format_percentage(value, precision = 0)
@@ -6,6 +6,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    raw HTML::Pipeline::MarkdownFilter.new(text).call
+    #raw HTML::Pipeline::MarkdownFilter.new(text).call
+    simple_format text
   end
 end

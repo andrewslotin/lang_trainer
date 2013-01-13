@@ -19,9 +19,9 @@ gem 'unicode'
 gem 'nokogiri'
 gem 'kaminari'
 
-group :production do
-  gem 'charlock_holmes', git: "git@github.com:brianmario/charlock_holmes.git", branch: "bundle-icu"
-end
+# group :production do
+#   gem 'charlock_holmes', git: "git@github.com:brianmario/charlock_holmes.git", branch: "bundle-icu"
+# end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -32,7 +32,7 @@ end
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'jquery-rails'
-gem 'html-pipeline'
+# gem 'html-pipeline'
 
 group :development do
   gem 'puma'
