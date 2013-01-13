@@ -1,4 +1,4 @@
-system "git remote add git@heroku.com:lang-trainer.git"
+system "git remote add heroku git@heroku.com:lang-trainer.git"
 
 known_hosts = File.expand_path("~/.ssh/config")
 
