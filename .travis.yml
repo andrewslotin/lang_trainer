@@ -1,6 +1,10 @@
 language: ruby
 script:
   - RAILS_ENV=test bundle exec rake spec
+bundler_args: --without development,production
+notifications:
+  recipients:
+    - andrew.slotin@gmail.com
 rvm:
   - 1.9.3
 services: mongodb
