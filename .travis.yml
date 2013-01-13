@@ -1,3 +1,7 @@
+env:
+  global:
+    - secure: "FHts5baSBnPtJV+AxBrcG9HDC331Pd60PRL28i0O8EtvUcQKbYKT78OopmiL\nteR2pfsGlDKPP+UFJrC4a55nvWmH+WQs4Q7+pVZFp4d+JMvDsO+WpdvbQs0C\nFw63LvbbZpI4Yg+taAT2stkYcD1bk+QOLX4iumRROXFhWpiQfEU="
+
 language: ruby
 script:
   - RAILS_ENV=test bundle exec rake spec
@@ -11,3 +15,10 @@ services: mongodb
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libicu-dev
+  - ruby script/travis_pre_ci.rb
+after_script:
+  - gem install heroku
+  - yes | ruby script/travis_heroku_deploy.rb
+  - heroku keys:clear
+  - yes | heroku keys:add
+  - git push heroku master
