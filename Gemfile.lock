@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:brianmario/charlock_holmes.git
+  revision: fdaa437122ab5d50f7907ba09a5febe9d0b980b8
+  branch: bundle-icu
+  specs:
+    charlock_holmes (0.6.13)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,7 +53,6 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    charlock_holmes (0.6.9)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     coderay (1.0.8)
@@ -265,6 +271,7 @@ DEPENDENCIES
   bson_ext
   cancan
   capybara (~> 1.0)
+  charlock_holmes!
   coffee-rails (~> 3.2.1)
   database_cleaner
   factory_girl_rails

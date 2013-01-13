@@ -19,6 +19,10 @@ gem 'unicode'
 gem 'nokogiri'
 gem 'kaminari'
 
+group :production do
+  gem 'charlock_holmes', git: "git@github.com:brianmario/charlock_holmes.git", branch: "bundle-icu"
+end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
